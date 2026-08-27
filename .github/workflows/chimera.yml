@@ -178,7 +178,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: stella-${{ github.sha }}
-          path: chimera-checkout/build/Cores/stella.zip
+          path: chimera-checkout/build/Cores/stella.chimeraCore
           if-no-files-found: error
 
       - name: Upload the frontend work dir on failure

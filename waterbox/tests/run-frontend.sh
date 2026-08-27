@@ -35,7 +35,7 @@ fi
 chimera_root="$(cd "$chimera_root" && pwd)"
 
 emu_exe="$chimera_root/build/Chimera.exe"
-package="$chimera_root/build/Cores/stella.zip"
+package="$chimera_root/build/Cores/stella.chimeraCore"
 rn="$root/build/meson-native/run-native"
 rom="$root/tests/roms/berryfun.bin"
 [ -f "$emu_exe" ] || { echo "Chimera not built: $emu_exe" >&2; exit 1; }

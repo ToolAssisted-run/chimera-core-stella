@@ -1,6 +1,6 @@
 #!/bin/sh
 # Builds the Stella waterbox core package and installs it into a chimera
-# checkout as build/Cores/stella.zip.
+# checkout as build/Cores/stella.chimeraCore.
 #
 # A package is core.wbx (fixed name) + waterbox.config + default_keybinds.json,
 # loaded through chimera's one built-in generic adapter.
@@ -99,7 +99,7 @@ PYPROV
 
 cores_dir="$chimera_root/build/Cores"
 mkdir -p "$cores_dir"
-zip_path="$cores_dir/stella.zip"
+zip_path="$cores_dir/stella.chimeraCore"
 rm -f "$zip_path"
 # deterministic packaging: sorted entries, fixed timestamp/permissions, pinned
 # compression - the package's SHA1 is the core's identity (movies cite it)
