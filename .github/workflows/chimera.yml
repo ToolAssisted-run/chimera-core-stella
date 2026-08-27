@@ -48,19 +48,19 @@ jobs:
 
       - name: Check out miniBox
         working-directory: chimera-checkout
-        run: git submodule update --init extern/chimera-common-minibox
+        run: git submodule update --init extern/tools/chimera-common-minibox
 
       - name: Cache the guest toolchain
         uses: actions/cache@v4
         with:
           path: |
-            chimera-checkout/extern/chimera-common-minibox/build/meson-linux
-            chimera-checkout/extern/chimera-common-minibox/build/meson-cpp
-          key: guest-cpp-${{ runner.os }}-${{ hashFiles('chimera-checkout/extern/chimera-common-minibox/.git') }}-${{ hashFiles('chimera-checkout/extern/chimera-common-minibox/meson.build') }}
+            chimera-checkout/extern/tools/chimera-common-minibox/build/meson-linux
+            chimera-checkout/extern/tools/chimera-common-minibox/build/meson-cpp
+          key: guest-cpp-${{ runner.os }}-${{ hashFiles('chimera-checkout/extern/tools/chimera-common-minibox/.git') }}-${{ hashFiles('chimera-checkout/extern/tools/chimera-common-minibox/meson.build') }}
 
       - name: Build miniBox (host + guest toolchain)
         run: |
-          mb="$PWD/chimera-checkout/extern/chimera-common-minibox"
+          mb="$PWD/chimera-checkout/extern/tools/chimera-common-minibox"
           # the host library, plus the C++ guest toolchain Stella needs
           [ -f "$mb/build/meson-linux/build.ninja" ] || meson setup "$mb/build/meson-linux" "$mb"
           meson compile -C "$mb/build/meson-linux"
@@ -69,13 +69,13 @@ jobs:
 
       - name: Build the native reference and sandbox drivers
         run: |
-          meson setup build/meson-native -Dminibox_dir="$PWD/chimera-checkout/extern/chimera-common-minibox"
+          meson setup build/meson-native -Dminibox_dir="$PWD/chimera-checkout/extern/tools/chimera-common-minibox"
           ninja -C build/meson-native
 
       - name: Build the waterbox core
         run: |
-          MINIBOX_DIR="$PWD/chimera-checkout/extern/chimera-common-minibox" sh waterbox/setup-guest.sh \
-            -- -Dminibox_dir="$PWD/chimera-checkout/extern/chimera-common-minibox"
+          MINIBOX_DIR="$PWD/chimera-checkout/extern/tools/chimera-common-minibox" sh waterbox/setup-guest.sh \
+            -- -Dminibox_dir="$PWD/chimera-checkout/extern/tools/chimera-common-minibox"
           ninja -C build/meson-guest
 
       - name: Core gate over the homebrew movie set
@@ -139,7 +139,7 @@ jobs:
 
       - name: Build the native reference
         run: |
-          meson setup build/meson-native -Dminibox_dir="$PWD/chimera-checkout/extern/chimera-common-minibox"
+          meson setup build/meson-native -Dminibox_dir="$PWD/chimera-checkout/extern/tools/chimera-common-minibox"
           ninja -C build/meson-native
 
       - name: Build and install the waterbox core package
@@ -148,7 +148,7 @@ jobs:
         # cite. A package built by hand stamps "+local" instead.
         env:
           CORE_VERSION: ${{ github.sha }}
-        run: ./waterbox/build-package.sh -m "$PWD/chimera-checkout/extern/chimera-common-minibox" -r "$PWD/chimera-checkout"
+        run: ./waterbox/build-package.sh -m "$PWD/chimera-checkout/extern/tools/chimera-common-minibox" -r "$PWD/chimera-checkout"
 
       - name: Frontend gate
         run: ./waterbox/tests/run-frontend.sh --chimera-root "$GITHUB_WORKSPACE/chimera-checkout"
