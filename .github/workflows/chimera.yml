@@ -140,7 +140,10 @@ jobs:
       - name: Build the native reference
         run: |
           meson setup build/meson-native -Dminibox_dir="$PWD/chimera-checkout/extern/tools/chimera-common-minibox"
-          ninja -C build/meson-native
+          # run-native only: the frontend gate compares Chimera against the
+          # native reference and never runs the sandbox driver, which would
+          # drag in a miniBox host build this job has no reason to do.
+          ninja -C build/meson-native run-native
 
       - name: Build and install the waterbox core package
         # The commit is the core's authoritative version: this build is the one
