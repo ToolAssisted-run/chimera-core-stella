@@ -1,0 +1,3 @@
+[submodule "extern/stella"]
+	path = extern/stella
+	url = https://github.com/stella-emu/stella.git

@@ -1,0 +1,30 @@
+{
+  "package": "stella",
+  "effectiveTerms": "GPL-2.0-or-later",
+  "commercialUse": "allowed under the GPL",
+  "note": "The built core combines this repository's MIT integration with Stella and is distributed under the GPL-2.0-or-later. blip_buf is LGPL-2.1-or-later, which the GPL permits.",
+  "components": [
+    {
+      "name": "chimera-core-stella (integration)",
+      "license": "MIT, and Stella's terms for patches/",
+      "url": "https://github.com/ToolAssisted-run/chimera-core-stella",
+      "commit": "{selfCommit}",
+      "file": "LICENSE",
+      "sourceUrl": "https://github.com/ToolAssisted-run/chimera-core-stella/archive/{commit}.tar.gz"
+    },
+    {
+      "name": "Stella",
+      "license": "GPL-2.0-or-later",
+      "url": "https://github.com/stella-emu/stella",
+      "commit": "{submodule:extern/stella}",
+      "file": "extern/stella/License.txt",
+      "sourceUrl": "https://github.com/stella-emu/stella/archive/{commit}.tar.gz"
+    },
+    {
+      "name": "blip_buf (vendored resampler)",
+      "license": "LGPL-2.1-or-later",
+      "url": "https://code.google.com/archive/p/blip-buf",
+      "file": "waterbox/vendored/blip_buf/blip_buf.c"
+    }
+  ]
+}

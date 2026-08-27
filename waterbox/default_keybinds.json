@@ -1,0 +1,21 @@
+{
+  "_comment": [
+    "Default bindings for the controller this package declares, in the shape of the other",
+    "packages': player one only, and the console switches on the keys nearest them."
+  ],
+  "AllTrollers": {
+    "Atari 2600 Controller": {
+      "P1 Up": "UpArrow",
+      "P1 Down": "DownArrow",
+      "P1 Left": "LeftArrow",
+      "P1 Right": "RightArrow",
+      "P1 Button": "Z",
+      "Reset": "Return",
+      "Select": "Backspace",
+      "Power": "P",
+      "Toggle Left Difficulty": "F3",
+      "Toggle Right Difficulty": "F4",
+      "Toggle TV Type": "F5"
+    }
+  }
+}
