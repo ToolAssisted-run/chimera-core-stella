@@ -33,6 +33,9 @@
 #include "Event.hxx"
 #include "Console.hxx"
 #include "M6532.hxx"
+#include "Settings.hxx"
+#include "OSystem.hxx"
+#include "FSNode.hxx"
 #include "Cart.hxx"
 #include "System.hxx"
 
@@ -112,6 +115,44 @@ static int g_vsyncNum = 60, g_vsyncDen = 1;
  * "did this frame look at the input" question chimera's InputWasRead answers.
  */
 extern "C" void chimera_input_was_read(void) { g_inputRead = 1; }
+
+/* ---------------------------------------------------------------------------
+ * THE MACHINE IS A FUNCTION OF THE PROJECT, not of the moment.
+ *
+ * Stella powers a console on the way a real one comes up: RAM full of whatever
+ * was there, the RIOT timer at some point in its cycle, from a generator that
+ * upstream seeds off the wall clock. That is faithful to hardware and the
+ * opposite of what a movie needs - the same cartridge would start from a
+ * different machine every time, and a run recorded on one would not replay on
+ * another. patches/0002 lets a host pin that seed; this is the host doing so,
+ * from a setting, so the number a project ran with is recorded in it.
+ *
+ * The sandbox hid the problem: its clock is frozen, so the guest was stable
+ * and only the native reference wandered. The equivalence gate found it.
+ */
+static uint32_t g_randomSeed;
+
+extern "C" int chimera_pinned_random_seed(uint32_t *seed)
+{
+	if (seed) *seed = g_randomSeed;
+	return 1;
+}
+
+/* ...and not of the wall clock either. Upstream arms a 500 MILLISECOND
+ * timeout, on a background thread, that clears every event once emulation
+ * starts: interactively that drops the keys a user was still holding while the
+ * rom booted. Frame-driven there is nothing to drop - each frame's input
+ * arrives with the frame - and the timeout instead lands on whatever frame the
+ * run happened to reach when half a real second had passed, wiping the console
+ * switches between a poll and the program's read of them.
+ *
+ * That is exactly what the gate caught: the same movie, replayed natively,
+ * read Select as pressed in one run and released in the next, at the identical
+ * cycle. The sandbox could not see it - no threads, no clock - so it was the
+ * harness's native reference that proved the machine was listening to the
+ * moment. patches/0003 asks this before arming the timeout.
+ */
+extern "C" int chimera_frame_driven(void) { return 1; }
 
 /* ---------------------------------------------------------------------------
  * What libretro.cxx would have provided. Upstream's headless backend expects a
@@ -358,6 +399,8 @@ ECL_EXPORT int Init(void)
 	}
 	fclose(f);
 
+	g_randomSeed = static_cast<uint32_t>(wbx_setting_long("randomSeed", 0));
+
 	SettingsLIBRETRO cfg;
 	char format[16];
 	strncpy(format, "AUTO", sizeof(format) - 1);
@@ -466,6 +509,7 @@ ECL_EXPORT void FrameAdvance(uint64_t packed)
 
 	DrainVideo();
 	DrainAudio();
+
 }
 
 ECL_EXPORT uint32_t *GetVideoBgra(void) { return g_videoOut; }

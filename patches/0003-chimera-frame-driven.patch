@@ -1,0 +1,33 @@
+diff --git a/src/emucore/EventHandler.cxx b/src/emucore/EventHandler.cxx
+index a6acd917a..2d098bad8 100644
+--- a/src/emucore/EventHandler.cxx
++++ b/src/emucore/EventHandler.cxx
+@@ -45,6 +45,12 @@
+ 
+ #include "EventHandler.hxx"
+ 
++/* chimera: 1 when a host runs the machine one frame at a time and supplies
++ * that frame's input; weak, so a build without a host keeps upstream's
++ * behaviour. */
++extern "C" int chimera_frame_driven() __attribute__((weak));
++extern "C" int chimera_frame_driven() { return 0; }
++
+ #ifdef CHEATCODE_SUPPORT
+   #include "Cheat.hxx"
+   #include "CheatManager.hxx"
+@@ -140,7 +146,14 @@ void EventHandler::reset(EventHandlerState state)
+   // Reset events almost immediately after starting emulation mode
+   // We wait a little while (0.5s), since 'hold' events may be present,
+   // and we want time for the ROM to process them
+-  if(state == EventHandlerState::EMULATION)
++  //
++  // chimera: not when a host drives the machine frame by frame. This timeout
++  // runs on a WALL CLOCK, on a background thread, and clearing every event
++  // half a real second in lands on whatever frame the run happened to reach -
++  // so the same movie replayed twice reads its switches differently. A
++  // frame-driven host has no 'hold' events to clear either: every frame's
++  // input arrives with the frame.
++  if(state == EventHandlerState::EMULATION && !chimera_frame_driven())
+     myOSystem.timer().setTimeout([&ev = myEvent]() { ev.clear(); }, 500);
+   // Toggle 7800 mode
+   set7800Mode();

@@ -6,9 +6,10 @@
  * digesting video, audio, lag and every memory domain per frame. The two
  * drivers differ only in how the exports are reached.
  *
- * Wire format (waterbox.config button order): 0 Power, 1 Reset, then
- * P1..P8 x {Up,Down,Left,Right,Select,Start,Y,B,X,A,L,R} - the .sol column
- * order, mapped 1:1.
+ * Wire format (waterbox.config button order): 0 Power, 1 Reset, 2 Select,
+ * 3 Left Difficulty, 4 Right Difficulty, 5 TV Type, then P1 and P2 x
+ * {Up,Down,Left,Right,Button}. quickerStella's .sol writes the console field
+ * in its own order; gate_parse_line maps it.
  */
 #ifndef GATE_HARNESS_H
 #define GATE_HARNESS_H
@@ -18,7 +19,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define GATE_BTN_COUNT (2 + 8 * 12)
+/* the wire this core declares: Power, the four console switches plus TV type,
+ * and two ports of five buttons (waterbox.config "input.buttons") */
+#define GATE_BTN_COUNT 16
 
 struct gate_core
 {
@@ -74,12 +77,14 @@ static void gate_exercise_pad(long frame, uint8_t *buttons)
 {
 	uint64_t x = (uint64_t)frame * 6364136223846793005ULL + 1442695040888963407ULL;
 	x ^= x >> 33;
-	for (int k = 0; k < 12; k++)
-		buttons[2 + k] = (x >> k) & 1;
+	/* the console switches (1..5) and player one's pad (6..10); POWER is left
+	 * alone, since resetting the machine every few frames proves nothing */
+	for (int k = 0; k < 10; k++)
+		buttons[1 + k] = (x >> k) & 1;
 	/* holding UP+DOWN or LEFT+RIGHT is not a pad state a real controller
 	 * produces and some games misbehave; drop the contradictions */
-	if (buttons[2] && buttons[3]) buttons[3] = 0;
-	if (buttons[4] && buttons[5]) buttons[5] = 0;
+	if (buttons[6] && buttons[7]) buttons[7] = 0;
+	if (buttons[8] && buttons[9]) buttons[9] = 0;
 }
 
 /* ---- .sol parsing (quickerGPGX's movie format) ---- */
@@ -114,26 +119,34 @@ static int gate_sol_load(const char *path, struct gate_sol *sol)
 	return 1;
 }
 
-/* one 12-column quickerSnes9x joypad field -> the wire's pad block at base;
- * the columns U D L R s S Y B X A l r map 1:1 onto the wire order */
+/* one quickerStella joypad field -> the wire's pad block at base; the columns
+ * U D L R B map 1:1 onto the wire order. A 2600 pad is four directions and one
+ * button, and a driving controller uses the same columns (its rotation is the
+ * left and right ones), so both parse the same way. */
 static int gate_parse_pad(const char *ctl, const char *s, uint8_t *buttons, int base)
 {
-	static const char cols[12] = { 'U','D','L','R','s','S','Y','B','X','A','l','r' };
+	static const char cols[5] = { 'U','D','L','R','B' };
 	if (strcmp(ctl, "none") == 0)
 		return 0;
-	if (strcmp(ctl, "joypad") != 0)
+	if (strcmp(ctl, "joypad") != 0 && strcmp(ctl, "joystick") != 0 && strcmp(ctl, "driving") != 0)
 		return -1;
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (s[i] != '.' && s[i] != cols[i])
 			return -1;
 		buttons[base + i] = s[i] != '.';
 	}
-	return 12;
+	return 5;
 }
 
-/* a full |console|ctl1|ctl2| line -> wire buttons; 0 on malformed input.
- * The console field is P (power) + r (reset). */
+/* a full |r s P l r|U D L R B|... line -> wire buttons; 0 on malformed input.
+ *
+ * quickerStella's console field is the machine's five switches in ITS order -
+ * reset, select, power, left difficulty, right difficulty - which is not the
+ * wire's order (power first, then the switches, then TV type). The mapping is
+ * spelled out here rather than assumed, because a movie that decodes into the
+ * wrong switches would still replay, just differently.
+ */
 static int gate_parse_line(const char *line, const char *sys, const char *ctl1,
 	const char *ctl2, uint8_t *buttons)
 {
@@ -142,23 +155,28 @@ static int gate_parse_line(const char *line, const char *sys, const char *ctl1,
 	const char *s = line;
 	if (*s++ != '|') return 0;
 
-	if (*s != '.' && *s != 'P') return 0;
-	buttons[0] = *s++ == 'P';
-	if (*s != '.' && *s != 'r') return 0;
-	buttons[1] = *s++ == 'r';
+	/* movie column -> wire index; the wire's TV type has no movie column */
+	static const char consoleCols[5] = { 'r', 's', 'P', 'l', 'r' };
+	static const int consoleWire[5] = { 1, 2, 0, 3, 4 };
+	for (int i = 0; i < 5; i++)
+	{
+		if (s[i] != '.' && s[i] != consoleCols[i]) return 0;
+		buttons[consoleWire[i]] = s[i] != '.';
+	}
+	s += 5;
 
 	int n;
 	if (strcmp(ctl1, "none") != 0)
 	{
 		if (*s++ != '|') return 0;
-		n = gate_parse_pad(ctl1, s, buttons, 2);
+		n = gate_parse_pad(ctl1, s, buttons, 6);
 		if (n < 0) return 0;
 		s += n;
 	}
 	if (strcmp(ctl2, "none") != 0)
 	{
 		if (*s++ != '|') return 0;
-		n = gate_parse_pad(ctl2, s, buttons, 2 + 12);
+		n = gate_parse_pad(ctl2, s, buttons, 11);
 		if (n < 0) return 0;
 		s += n;
 	}
@@ -270,7 +288,6 @@ static int gate_run(const struct gate_core *c, const struct gate_opts *o)
 		ah = gate_fnv(ah, audio, (size_t)n * 2 * sizeof(int16_t));
 		if (!c->input_was_read())
 			lag++;
-
 		if (o->screenshotPath && f == frames - 1)
 			gate_write_tga(o->screenshotPath, video, w, h);
 	}

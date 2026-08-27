@@ -38,17 +38,18 @@ report() { printf "%-30s %-6s %s\n" "$1" "$2" "$3"; case "$2" in PASS) ok=$((ok+
 printf "%-30s %-6s %s\n" "Check" "Result" "Detail"
 printf "%-30s %-6s %s\n" "-----" "------" "------"
 
-# name rom frames settings
+# name rom frames settings movie(- = pad exercise)
 tests=(
-	"berryfun berryfun.bin 600 {}"
-	"hellway hellway.a26 600 {}"
-	"berryfunPal berryfun.bin 300 {\"format\":\"PAL\"}"
-	"hellwayUnplugged hellway.a26 300 {\"port2\":\"none\"}"
-	"berryfunDriving berryfun.bin 300 {\"port1\":\"driving\"}"
+	"hellway hellway.a26 - {} hellway.playaround.sol"
+	"berryfun berryfun.bin 600 {} -"
+	"hellwayIdle hellway.a26 600 {} -"
+	"berryfunPal berryfun.bin 300 {\"format\":\"PAL\"} -"
+	"hellwayUnplugged hellway.a26 300 {\"port2\":\"none\"} -"
+	"berryfunDriving berryfun.bin 300 {\"port1\":\"driving\"} -"
 )
 
 for t in "${tests[@]}"; do
-	read -r name rom frames settings <<< "$t"
+	read -r name rom frames settings movie <<< "$t"
 
 	wd="$work/$name"
 	mkdir -p "$wd"
@@ -56,7 +57,13 @@ for t in "${tests[@]}"; do
 	printf '{"cart":["%s"]}' "$rom" > "$wd/slots"
 	printf '%s' "$settings" > "$wd/settings"
 
-	args=(--frames "$frames" --exercise)
+	if [ "$movie" = "-" ]; then
+		args=(--frames "$frames" --exercise)
+	else
+		# a real playaround, replayed frame for frame: the input a person
+		# actually gave, not a pattern
+		args=(--sol "$root/tests/movies/$movie" --ctl1 joystick --ctl2 none)
+	fi
 
 	if ! "$nat/run-native" "$wd" "${args[@]}" 2>"$work/nat.err" | digests > "$work/nat.txt"; then
 		report "$name:equivalence" FAIL "native runner error: $(head -1 "$work/nat.err")"; continue
@@ -64,8 +71,9 @@ for t in "${tests[@]}"; do
 	if ! "$nat/run-wbx" "$gst/core.wbx" "$wd" "${args[@]}" 2>"$work/box.err" | digests > "$work/box.txt"; then
 		report "$name:equivalence" FAIL "waterbox runner error: $(head -1 "$work/box.err")"; continue
 	fi
+	nframes="$(sed -n 's/^frames=//p' "$work/box.txt")"
 	if cmp -s "$work/nat.txt" "$work/box.txt"; then
-		report "$name:equivalence" PASS "$frames frames, native == waterboxed"
+		report "$name:equivalence" PASS "$nframes frames, native == waterboxed"
 	else
 		report "$name:equivalence" FAIL "$(diff "$work/nat.txt" "$work/box.txt" | tr '\n' ' ' | head -c 120)"
 		continue
@@ -73,7 +81,7 @@ for t in "${tests[@]}"; do
 
 	# a hollow pass cannot sneak through: the input schedule must have shaped
 	# the machine - an idle run of the same length must differ
-	"$nat/run-wbx" "$gst/core.wbx" "$wd" --frames "$frames" 2>/dev/null | digests > "$work/idle.txt"
+	"$nat/run-wbx" "$gst/core.wbx" "$wd" --frames "$nframes" 2>/dev/null | digests > "$work/idle.txt"
 	if cmp -s "$work/box.txt" "$work/idle.txt"; then
 		report "$name:input-shaped" FAIL "the pad exercise changed nothing"
 	else
