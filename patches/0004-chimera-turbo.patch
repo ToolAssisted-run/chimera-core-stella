@@ -1,0 +1,39 @@
+diff --git a/src/emucore/tia/TIA.cxx b/src/emucore/tia/TIA.cxx
+--- a/src/emucore/tia/TIA.cxx
++++ b/src/emucore/tia/TIA.cxx
+@@ -1897,6 +1897,15 @@
+   mySystem->m6502().clearHaltRequest();
+ }
+ 
++/* chimera: 0 while the frontend is fast-forwarding. The TIA's picture is a
++ * write-only side product - the priority chain in renderPixel only READS object state,
++ * and the collision latches the 6507 can see are updated in updateCollision(),
++ * not here - so a frame nobody is going to look at can skip all of it. The
++ * frame-layout detector is the one reader that is not a person: it decides
++ * NTSC or PAL from the colours it sees, and that IS the machine, so it is
++ * served whatever the frontend asked for. */
++extern "C" int chimera_render_enabled;
++
+ // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ void TIA::cloneLastLine()
+ {
+@@ -1915,8 +1924,9 @@
+     // myCurrentRowPtr points to row y here: cloneLastLine() is always called
+     // before myFrameManager->nextLine() advances y, so the pointer is still
+     // current and avoids two y*H_PIXEL multiplies
+-    std::copy_n(myCurrentRowPtr - TIAConstants::H_PIXEL,
+-      TIAConstants::H_PIXEL, myCurrentRowPtr);
++    if(chimera_render_enabled)  // chimera: see renderPixel
++      std::copy_n(myCurrentRowPtr - TIAConstants::H_PIXEL,
++        TIAConstants::H_PIXEL, myCurrentRowPtr);
+ 
+     // Save positions of objects for auto-phosphor
+     if(myAutoPhosphorEnabled) [[unlikely]]
+@@ -1965,6 +1975,7 @@
+ FORCE_INLINE void TIA::renderPixel(uInt32 x)
+ {
+   if (x >= TIAConstants::H_PIXEL) [[unlikely]] return;
++  if (!chimera_render_enabled && !myIsLayoutDetector) [[unlikely]] return;
+ 
+   uInt8 color = 0;
+ 

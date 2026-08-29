@@ -117,6 +117,18 @@ static int g_vsyncNum = 60, g_vsyncDen = 1;
 extern "C" void chimera_input_was_read(void) { g_inputRead = 1; }
 
 /* ---------------------------------------------------------------------------
+ * Turbo: the TIA is told to stop producing a picture. patches/ makes
+ * TIA::renderPixel and TIA::cloneLastLine read this; everything the 6507 can
+ * see - the collision latches, the frame layout detector - is untouched, which
+ * is what run-gate.sh's turbo leg checks.
+ *
+ * ECL_INVISIBLE because it is the frontend's policy for the moment, not part of
+ * the machine: a state saved while fast-forwarding must not put the machine
+ * back into it when it is loaded to be looked at.
+ */
+extern "C" { ECL_INVISIBLE int chimera_render_enabled = 1; }
+
+/* ---------------------------------------------------------------------------
  * THE MACHINE IS A FUNCTION OF THE PROJECT, not of the moment.
  *
  * Stella powers a console on the way a real one comes up: RAM full of whatever
@@ -520,10 +532,18 @@ ECL_EXPORT void FrameAdvance(uint64_t packed)
 	g_stella.pollInput();
 	g_stella.runFrame();
 
-	DrainVideo();
+	/* turbo: the TIA wrote no pixels, so there is nothing to drain and the
+	 * buffer keeps the last frame that was drawn */
+	if (chimera_render_enabled) DrainVideo();
 	DrainAudio();
 
 }
+
+/* Turbo (optional guest ABI group): while off the core must produce no picture
+ * and must otherwise be exactly the machine it would have been. run-gate.sh's
+ * turbo leg is the proof - N undrawn frames plus one drawn one come out byte for
+ * byte the same machine, and the same picture, as N+1 drawn ones. */
+ECL_EXPORT void SetRenderingEnabled(int on) { chimera_render_enabled = on != 0; }
 
 ECL_EXPORT uint32_t *GetVideoBgra(void) { return g_videoOut; }
 ECL_EXPORT int GetVideoWidth(void) { return g_vwidth; }
