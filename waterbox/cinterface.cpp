@@ -425,8 +425,21 @@ ECL_EXPORT int Init(void)
 		return 0;
 	}
 
-	/* the machine's own rate, which is the cartridge's doing rather than a
-	 * choice: 60Hz for an NTSC program, 50 for a PAL one */
+	/* The rate the cartridge asks for: 60Hz for an NTSC program, 50 for a PAL
+	 * one, which is what Stella's own libretro layer reports (getVideoRate).
+	 *
+	 * ROUND ON PURPOSE, and the only core here that is. Every other machine in
+	 * this project has one refresh rate that its hardware fixes, so declaring
+	 * anything but that rate is a bug - the PSP and the 3DO both had one. A
+	 * 2600 has no such rate: the PROGRAM decides how many scanlines a frame is
+	 * by when it strobes VSYNC, so a cartridge that emits the conventional 262
+	 * lines runs at 59.9227Hz and one that emits 261 or 263 does not, and some
+	 * change from frame to frame on purpose. There is no single true number to
+	 * put here, so this says what the standard asks for and does not pretend
+	 * to more precision than the machine has. A frontend computing a running
+	 * time from it is off by about a tenth of a percent, and the honest fix
+	 * would be to report the rate the loaded program actually achieved rather
+	 * than to swap one constant for another. */
 	g_vsyncNum = static_cast<int>(g_stella.getVideoRate());
 	g_vsyncDen = 1;
 
