@@ -95,12 +95,32 @@ for t in "${tests[@]}"; do
 		# Turbo: the core's drawing switched off for the first half of the run and
 	# back on for the second. The machine, the sound, the lag count and every
 	# picture of that second half must be what they would have been.
-	"$nat/run-wbx" "$gst/core.wbx" "$wd" "${args[@]}" 2>/dev/null | turboDigests > "$work/tnorm.txt"
-	if "$nat/run-wbx" "$gst/core.wbx" "$wd" "${args[@]}" --turbo 2>/dev/null | turboDigests > "$work/turbo.txt"; then
-		if cmp -s "$work/tnorm.txt" "$work/turbo.txt"; then
-			report "$name:turbo" PASS "$frames frames, half of them undrawn, same machine and same pictures"
-		else
+	#
+	# And the first half really must have gone undrawn. The comparison above is
+	# blind to that on its own: it is held over tailVideoHash, the second half
+	# only, so a SetRenderingEnabled that did nothing at all would leave every
+	# compared digest identical and this leg would report "half of them undrawn"
+	# about a run that drew every frame. That is not hypothetical - stubbing the
+	# export to a no-op and rebuilding gives 25 ok, 0 failed. The whole-run
+	# videoHash is the witness, and the harness already prints it: it covers the
+	# first half too, so the two runs cannot agree on it unless the picture was
+	# never switched off. (This holds because these roms draw a moving picture.
+	# A movie whose screen never changes would agree either way, and would need
+	# a different witness.)
+	"$nat/run-wbx" "$gst/core.wbx" "$wd" "${args[@]}" 2>/dev/null > "$work/tnorm.raw"
+	if "$nat/run-wbx" "$gst/core.wbx" "$wd" "${args[@]}" --turbo 2>/dev/null > "$work/tturbo.raw"; then
+		turboDigests < "$work/tnorm.raw" > "$work/tnorm.txt"
+		turboDigests < "$work/tturbo.raw" > "$work/turbo.txt"
+		nvh="$(grep -m1 '^videoHash=' "$work/tnorm.raw")"
+		tvh="$(grep -m1 '^videoHash=' "$work/tturbo.raw")"
+		if ! cmp -s "$work/tnorm.txt" "$work/turbo.txt"; then
 			report "$name:turbo" FAIL "$(diff "$work/tnorm.txt" "$work/turbo.txt" | tr '\n' ' ' | head -c 120)"
+		elif [ -z "$nvh" ] || [ -z "$tvh" ]; then
+			report "$name:turbo" FAIL "no whole-run videoHash to tell a skipped frame from a drawn one"
+		elif [ "$nvh" = "$tvh" ]; then
+			report "$name:turbo" FAIL "the turbo run drew every frame - nothing was skipped"
+		else
+			report "$name:turbo" PASS "$frames frames, half of them really undrawn, same machine and same pictures"
 		fi
 	else
 		report "$name:turbo" FAIL "turbo runner error"
