@@ -1,5 +1,5 @@
 {
-  "_comment": "The core-declared file form for chimera's project wizard: an Atari 2600 project is one cartridge.",
+  "_comment": "This file lists the kinds of file an Atari 2600 project can hold. Chimera's New Project window is built from it. A project is one cartridge.",
   "slots": [
     {
       "id": "cart",
@@ -10,7 +10,7 @@
         "a26",
         "bin"
       ],
-      "help": "The Atari 2600 cartridge rom. Stella works out the mapper from the bytes, so any size from 2K up is fine."
+      "help": "The Atari 2600 cartridge ROM. Stella works out the cartridge type from the file's contents, so any size from 2 KB up is accepted."
     }
   ]
 }
