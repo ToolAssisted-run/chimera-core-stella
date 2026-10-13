@@ -69,7 +69,8 @@ instructions, from a fresh clone to the gates, are in
 ./waterbox/tests/run-frontend.sh        # the same machine through Chimera itself
 ```
 
-The roms under `tests/roms` are homebrew and free to distribute. Commercial
-cartridges go in `tests/roms-local` (gitignored).
+The roms under `tests/roms` are homebrew their authors published for free
+download; `tests/roms/README.md` says whose they are and what is known of
+their terms. Commercial cartridges go in `tests/roms-local` (gitignored).
 
 Status and plan: `docs/PLAN.md`.
