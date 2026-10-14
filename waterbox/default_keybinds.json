@@ -5,12 +5,12 @@
   ],
   "AllTrollers": {
     "Atari 2600 Controller": {
-      "P1 Up": "UpArrow",
-      "P1 Down": "DownArrow",
-      "P1 Left": "LeftArrow",
-      "P1 Right": "RightArrow",
+      "P1 Up": "Up",
+      "P1 Down": "Down",
+      "P1 Left": "Left",
+      "P1 Right": "Right",
       "P1 Button": "Z",
-      "Reset": "Return",
+      "Reset": "Enter",
       "Select": "Backspace",
       "Power": "P",
       "Toggle Left Difficulty": "F3",

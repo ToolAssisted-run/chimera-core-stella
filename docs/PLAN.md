@@ -106,3 +106,17 @@ away.
   would test more of the machine.
 - **Commercial roms.** `tests/roms-local` (gitignored) is where a manifest
   replay over real cartridges would go; only homebrew ships in the repository.
+
+## 2026-10-14: the default bindings name keys Chimera sends
+
+The joystick was on UpArrow, DownArrow, LeftArrow and RightArrow and Reset on
+Return; they are on Up, Down, Left, Right and Enter. Chimera hands a key to
+the bindings under one name: the name its DistinctKeyNameOverrides gives it
+("Number1", "Enter", "Backtick", "KeypadAdd") or else its DistinctKey name
+("Up"); and unless told otherwise it reads the left and right Shift, Ctrl and
+Alt as one key each, "Shift", "Ctrl" and "Alt" (Input.cs,
+Config.MergeLAndRModifierKeys). A default binding to another name never fired,
+so those controls shipped unbound on the keyboard. Checked on Xvfb: with 1,
+Return, left Shift and Up held, Chimera reports Number1, Enter, Shift and Up.
+Left and right names stay beside the merged one, for a setup with the merging
+off.
