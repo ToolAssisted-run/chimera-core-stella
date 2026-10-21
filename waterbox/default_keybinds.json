@@ -1,17 +1,18 @@
 {
   "_comment": [
     "Default bindings for the controller this package declares, in the shape of the other",
-    "packages': player one only, and the console switches on the keys nearest them."
+    "packages': player one only, and the console switches on the keys nearest them.",
+    "The joystick is also on the first game controller: the directional pad and the left stick are the directions, A is the button, Start is Reset and Back is Select. Power, the difficulty switches and the TV type stay on the keyboard (chimera#336)."
   ],
   "AllTrollers": {
     "Atari 2600 Controller": {
-      "P1 Up": "Up",
-      "P1 Down": "Down",
-      "P1 Left": "Left",
-      "P1 Right": "Right",
-      "P1 Button": "Z",
-      "Reset": "Enter",
-      "Select": "Backspace",
+      "P1 Up": "Up, J1 POV0U, X1 DpadUp, X1 LStickUp",
+      "P1 Down": "Down, J1 POV0D, X1 DpadDown, X1 LStickDown",
+      "P1 Left": "Left, J1 POV0L, X1 DpadLeft, X1 LStickLeft",
+      "P1 Right": "Right, J1 POV0R, X1 DpadRight, X1 LStickRight",
+      "P1 Button": "Z, J1 B1, X1 A",
+      "Reset": "Enter, J1 B10, X1 Start",
+      "Select": "Backspace, J1 B9, X1 Back",
       "Power": "P",
       "Toggle Left Difficulty": "F3",
       "Toggle Right Difficulty": "F4",
