@@ -25,6 +25,12 @@
       "license": "LGPL-2.1-or-later",
       "url": "https://code.google.com/archive/p/blip-buf",
       "file": "waterbox/vendored/blip_buf/blip_buf.c"
+    },
+    {
+      "name": "An Atari 2600 joystick, a photograph (pictures/atari-2600-joystick.png)",
+      "license": "Public domain",
+      "url": "https://commons.wikimedia.org/wiki/File:Atari-2600-Joystick.jpg",
+      "file": "pictures/atari-2600-joystick.txt"
     }
   ]
 }
