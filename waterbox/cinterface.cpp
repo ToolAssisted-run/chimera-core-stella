@@ -114,7 +114,21 @@ static int g_vsyncNum = 60, g_vsyncDen = 1;
  * reads its controllers and console switches through - which is exactly the
  * "did this frame look at the input" question chimera's InputWasRead answers.
  */
-extern "C" void chimera_input_was_read(void) { g_inputRead = 1; }
+/* Chimera's function to call at each read of the controls, so a Lua script's
+ * event.oninputpoll runs there (chimera#344). It is the same callback slot in
+ * every session and no savestate carries it. */
+ECL_INVISIBLE static uintptr_t (*g_inputPoll)(uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+ECL_EXPORT void SetInputPollCallback(uint64_t fn)
+{
+	g_inputPoll = (uintptr_t (*)(uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))(uintptr_t)fn;
+}
+
+extern "C" void chimera_input_was_read(void)
+{
+	g_inputRead = 1;
+	if (g_inputPoll)
+		g_inputPoll(0, 0, 0, 0, 0, 0);
+}
 
 /* ---------------------------------------------------------------------------
  * Turbo: the TIA is told to stop producing a picture. patches/ makes
