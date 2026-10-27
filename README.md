@@ -39,8 +39,7 @@ Chimera ships no cores and downloads none. Download
 `stella-<version>.chimeraCore` from this repository's
 [Releases](https://github.com/ToolAssisted-run/chimera-core-stella/releases)
 page (`dev` follows main, `nightly-YYYY-MM-DD` builds are dated), or build it,
-and put the file in the `Cores` folder beside `Chimera.exe`. File > Core
-Manager lists the cores in that folder. The same file works on Linux and on
+and put the file in the `cores` folder beside Chimera's program. Tools > Core Manager... lists the cores in that folder. The same file works on Linux and on
 Windows. Game files are not included: you provide them.
 
 ## Building

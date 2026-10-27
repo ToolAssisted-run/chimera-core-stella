@@ -80,10 +80,9 @@ puts in the cores folder.
 
 - Source checkout: the cores folder is `$CHIMERA/build/Cores/`, and
   `build-package.sh -r "$CHIMERA"` has already written the package there.
-- Release bundle: copy `stella.chimeraCore` into the `Cores` folder beside
-  `Chimera.exe`, or into the folder chosen in File > Core Manager >
+- Release bundle: copy `stella.chimeraCore` into the `cores` folder beside Chimera's program, or into the folder chosen in Tools > Core Manager... >
   Change folder...
-- File > Core Manager lists the cores in that folder. Refresh List rescans it.
+- Tools > Core Manager... lists the cores in that folder. Refresh List rescans it.
   The same file works on Linux and on Windows.
 
 ## Test before you commit
