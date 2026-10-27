@@ -1,6 +1,6 @@
 -- Frontend witness for the Genesis Plus GX package: run the core inside
 -- Chimera for a fixed number of frames with nothing pressed, then dump the
--- whole 68K RAM domain. The driver compares that dump byte-for-byte against
+-- whole RAM. The driver compares that dump byte-for-byte against
 -- the native reference (run-native --dump-domain).
 --
 -- Job description comes from the file named by the MINIHAWK_JOB env var:
@@ -9,9 +9,8 @@
 --   meta=<path to write result metadata (text)>
 --   shot=<optional path to write a screenshot>
 
--- the primary RAM domain is named per system (the Genesis calls it 68K RAM,
--- the 8-bit machines Main RAM); take whichever this machine has
-local DOMAIN = "68K RAM"
+-- the primary RAM domain is named per system; this machine's is Main RAM
+local DOMAIN = "Main RAM"
 
 local function writeAll(path, data)
 	local f = assert(io.open(path, "wb"))
