@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella nie mogła stworzyć konsoli z tego wkładu.",
+		"error.no_file": "W projekcie nie ma pliku wkładu.",
+		"error.not_cart": "„%1” ma %2 bajtów, czyli nie ma rozmiaru wkładu Atari 2600.",
+		"error.not_read": "Nie można odczytać „%1”.",
+		"setting.format": "Format telewizji",
+		"setting.format.about": "Jaki standard telewizyjny jest dla konsoli. AUTO używa tego, co mówi wkład, tak jak prawdziwe 2600. Ręczny wybór pozwala grać grze zrobionej dla jednego regionu w drugim. Zmienia on liczbę klatek na sekundę, więc film potrzebuje tej samej wartości.",
+		"setting.port1": "Urządzenie portu 1",
+		"setting.port1.about": "Co jest podłączone do lewego portu kontrolera.",
+		"setting.port2": "Urządzenie portu 2",
+		"setting.port2.about": "Co jest podłączone do prawego portu kontrolera.",
+		"setting.randomseed": "Ziarno po włączeniu",
+		"setting.randomseed.about": "Liczba, która decyduje, co pamięć i zegar maszyny zawierają po włączeniu. W prawdziwym 2600 zawierają to, co zostało po poprzednim użyciu. Stella to naśladuje losowymi wartościami, co sprawiałoby, że każda sesja zaczynałaby się inaczej. Przy stałej liczbie ten sam projekt zawsze startuje tak samo, a film zapisuje użytą liczbę.",
+		"slot.cart": "Wkład",
+		"slot.cart.help": "Plik ROM wkładu Atari 2600. Stella ustala typ wkładu z zawartości pliku, więc przyjmowany jest każdy rozmiar od 2 KB w górę."
+	}
+}

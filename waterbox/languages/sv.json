@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella kunde inte skapa en konsol av den här kassetten.",
+		"error.no_file": "Ingen kassettfil finns i projektet.",
+		"error.not_cart": "'%1' är %2 byte, vilket inte är storleken på en Atari 2600-kassett.",
+		"error.not_read": "Kunde inte läsa '%1'.",
+		"setting.format": "TV-format",
+		"setting.format.about": "Vilken TV-standard konsolen är byggd för. AUTO använder det kassetten säger, precis som en riktig 2600 gör. Om du väljer ett själv kan ett spel gjort för en region köras på den andra. Det ändrar bildfrekvensen, så en film behöver samma värde.",
+		"setting.port1": "Enhet i port 1",
+		"setting.port1.about": "Det som är anslutet till den vänstra kontrollporten.",
+		"setting.port2": "Enhet i port 2",
+		"setting.port2.about": "Det som är anslutet till den högra kontrollporten.",
+		"setting.randomseed": "Startfrö",
+		"setting.randomseed.about": "Talet som avgör vad maskinens minne och timer innehåller när den slås på. På en riktig 2600 innehåller de det som lämnades kvar. Stella härmar det med slumpvärden, vilket skulle göra att varje session startar olika. Med ett fast tal startar samma projekt alltid på samma sätt, och en film registrerar talet den använde.",
+		"slot.cart": "Kassett",
+		"slot.cart.help": "Atari 2600-kassettens ROM. Stella tar reda på kassettypen från filens innehåll, så alla storlekar från 2 KB och uppåt godtas."
+	}
+}

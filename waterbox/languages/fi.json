@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella ei voinut luoda konsolia tästä kasetista.",
+		"error.no_file": "Projektissa ei ole kasettitiedostoa.",
+		"error.not_cart": "'%1' on %2 tavua, mikä ei ole Atari 2600 -kasetin koko.",
+		"error.not_read": "Kohdetta '%1' ei voitu lukea.",
+		"setting.format": "Televisiostandardi",
+		"setting.format.about": "Mitä televisiostandardia konsoli on tehty käyttämään. AUTO käyttää sitä, mitä kasetti ilmoittaa, kuten oikea 2600 tekee. Jos valitset yhden itse, toiselle alueelle tehty peli voi toimia toisella. Tämä muuttaa kuvanopeutta, joten elokuva tarvitsee saman arvon.",
+		"setting.port1": "Portin 1 laite",
+		"setting.port1.about": "Mikä on kytketty vasempaan ohjainporttiin.",
+		"setting.port2": "Portin 2 laite",
+		"setting.port2.about": "Mikä on kytketty oikeaan ohjainporttiin.",
+		"setting.randomseed": "Käynnistyksen siemen",
+		"setting.randomseed.about": "Luku, joka päättää, mitä koneen muisti ja ajastin sisältävät, kun se käynnistetään. Oikealla 2600:lla ne sisältävät sen, mikä sinne jäi. Stella jäljittelee sitä satunnaisilla arvoilla, mikä saisi jokaisen istunnon alkamaan eri tavalla. Kun luku on kiinteä, sama projekti alkaa aina samalla tavalla, ja elokuva kirjaa käytetyn luvun.",
+		"slot.cart": "Kasetti",
+		"slot.cart.help": "Atari 2600 -kasetin ROM. Stella päättelee kasettityypin tiedoston sisällöstä, joten mikä tahansa koko 2 KB:stä alkaen hyväksytään."
+	}
+}

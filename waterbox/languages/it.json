@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella non è riuscito a creare una console da questa cartuccia.",
+		"error.no_file": "Nel progetto non c'è nessun file di cartuccia.",
+		"error.not_cart": "'%1' è di %2 byte, che non è la dimensione di una cartuccia Atari 2600.",
+		"error.not_read": "Impossibile leggere '%1'.",
+		"setting.format": "Formato televisivo",
+		"setting.format.about": "Quale standard televisivo è previsto per la console. AUTO usa quello indicato dalla cartuccia, come fa un vero 2600. Sceglierne uno a mano permette a un gioco fatto per una regione di girare sull'altra. Cambia la frequenza di fotogrammi, quindi un filmato richiede lo stesso valore.",
+		"setting.port1": "Periferica porta 1",
+		"setting.port1.about": "Ciò che è collegato alla porta controller sinistra.",
+		"setting.port2": "Periferica porta 2",
+		"setting.port2.about": "Ciò che è collegato alla porta controller destra.",
+		"setting.randomseed": "Seme all'accensione",
+		"setting.randomseed.about": "Il numero che decide che cosa contengono la memoria e il timer della macchina quando viene accesa. Su un vero 2600 contengono ciò che vi è rimasto. Stella lo imita con valori casuali, il che farebbe partire ogni sessione in modo diverso. Con questo numero fisso, lo stesso progetto parte sempre allo stesso modo, e un filmato registra il numero usato.",
+		"slot.cart": "Cartuccia",
+		"slot.cart.help": "La ROM della cartuccia Atari 2600. Stella riconosce il tipo di cartuccia dal contenuto del file, quindi viene accettata qualsiasi dimensione da 2 KB in su."
+	}
+}

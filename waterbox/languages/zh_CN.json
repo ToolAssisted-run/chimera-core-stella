@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella 无法用此卡带创建主机。",
+		"error.no_file": "项目中没有卡带文件。",
+		"error.not_cart": "'%1' 为 %2 字节，不是 Atari 2600 卡带的大小。",
+		"error.not_read": "无法读取 '%1'。",
+		"setting.format": "电视制式",
+		"setting.format.about": "主机按照哪种电视标准设计。AUTO 使用卡带所指定的标准，与真实的 2600 相同。手动选择某一种，可让为某一地区制作的游戏在另一地区运行。它会改变帧率，因此录像需要相同的值。",
+		"setting.port1": "端口 1 设备",
+		"setting.port1.about": "插在左侧控制器端口上的设备。",
+		"setting.port2": "端口 2 设备",
+		"setting.port2.about": "插在右侧控制器端口上的设备。",
+		"setting.randomseed": "开机种子",
+		"setting.randomseed.about": "决定机器开机时其内存和计时器保存什么内容的数字。在真实的 2600 上，它们保存的是上次遗留的内容。Stella 用随机值模拟这一点，这会使每次会话的开始都不同。将此数字固定后，同一项目总是以相同方式开始，录像也会记录所用的数字。",
+		"slot.cart": "卡带",
+		"slot.cart.help": "Atari 2600 卡带 ROM。Stella 根据文件内容判断卡带类型，因此接受任何 2 KB 及以上的大小。"
+	}
+}

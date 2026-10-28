@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella bu kartuştan bir konsol kuramadı.",
+		"error.no_file": "Projede kartuş dosyası yok.",
+		"error.not_cart": "'%1' %2 bayt; bu bir Atari 2600 kartuşunun boyutu değil.",
+		"error.not_read": "'%1' okunamadı.",
+		"setting.format": "Televizyon Biçimi",
+		"setting.format.about": "Konsolun hangi televizyon standardı için yapıldığı. AUTO, gerçek bir 2600'ün yaptığı gibi kartuşun bildirdiğini kullanır. Elle birini seçmek, bir bölge için yapılmış oyunun öbür bölgede çalışmasını sağlar. Kare hızını değiştirir; bu yüzden bir film aynı değeri gerektirir.",
+		"setting.port1": "1. Port Aygıtı",
+		"setting.port1.about": "Sol denetleyici portuna takılı olan şey.",
+		"setting.port2": "2. Port Aygıtı",
+		"setting.port2.about": "Sağ denetleyici portuna takılı olan şey.",
+		"setting.randomseed": "Açılış Tohumu",
+		"setting.randomseed.about": "Makine açıldığında belleğinin ve zamanlayıcısının neyi tutacağını belirleyen sayı. Gerçek bir 2600'te orada kalan her ne varsa onu tutarlar. Stella bunu rastgele değerlerle taklit eder; bu da her oturumun farklı başlamasına yol açardı. Bu sayı sabitlendiğinde aynı proje her zaman aynı şekilde başlar ve bir film kullandığı sayıyı kaydeder.",
+		"slot.cart": "Kartuş",
+		"slot.cart.help": "Atari 2600 kartuşunun ROM'u. Stella kartuş türünü dosyanın içeriğinden çıkarır; bu yüzden 2 KB'den büyük her boyut kabul edilir."
+	}
+}

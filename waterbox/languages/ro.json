@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella nu a putut face o consolă din această cartușă.",
+		"error.no_file": "Niciun fișier de cartușă nu este în proiect.",
+		"error.not_cart": "„%1” are %2 octeți, ceea ce nu este dimensiunea unei cartușe Atari 2600.",
+		"error.not_read": "Nu s-a putut citi „%1”.",
+		"setting.format": "Format televizor",
+		"setting.format.about": "Ce standard de televiziune este construită consola. AUTO folosește ce spune cartușa, așa cum face un 2600 real. Alegerea manuală a unuia lasă un joc făcut pentru o regiune să ruleze pe cealaltă. Schimbă rata de cadre, deci un film are nevoie de aceeași valoare.",
+		"setting.port1": "Periferic portul 1",
+		"setting.port1.about": "Ce este conectat la portul stâng de control.",
+		"setting.port2": "Periferic portul 2",
+		"setting.port2.about": "Ce este conectat la portul drept de control.",
+		"setting.randomseed": "Sămânța de pornire",
+		"setting.randomseed.about": "Numărul care decide ce conțin memoria și temporizatorul mașinii când este pornită. Pe un 2600 real, ele conțin ce a rămas acolo. Stella imită asta cu valori aleatorii, ceea ce ar face ca fiecare sesiune să pornească diferit. Cu acest număr fixat, același proiect pornește mereu la fel, iar un film înregistrează numărul folosit.",
+		"slot.cart": "Cartușă",
+		"slot.cart.help": "ROM-ul cartușei Atari 2600. Stella află tipul cartușei din conținutul fișierului, deci este acceptată orice dimensiune de la 2 KB în sus."
+	}
+}

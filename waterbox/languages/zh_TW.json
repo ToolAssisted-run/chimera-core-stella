@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella 無法以此卡帶建立主機。",
+		"error.no_file": "專案中沒有卡帶檔案。",
+		"error.not_cart": "'%1' 為 %2 位元組，不是 Atari 2600 卡帶的大小。",
+		"error.not_read": "無法讀取 '%1'。",
+		"setting.format": "電視格式",
+		"setting.format.about": "主機所依據的電視標準。AUTO 會使用卡帶所宣告的標準，與真正的 2600 相同。手動選擇則可讓為某一地區製作的遊戲在另一個地區執行。它會改變影格率，因此影片需要相同的值。",
+		"setting.port1": "連接埠 1 裝置",
+		"setting.port1.about": "插在左側控制器連接埠上的裝置。",
+		"setting.port2": "連接埠 2 裝置",
+		"setting.port2.about": "插在右側控制器連接埠上的裝置。",
+		"setting.randomseed": "開機種子碼",
+		"setting.randomseed.about": "決定機器開機時記憶體與計時器內容的數字。在真正的 2600 上，它們保留的是先前留下的值。Stella 以隨機值模擬此情況，這會使每次工作階段的開始方式都不同。將此數字固定後，同一個專案每次都會以相同的方式開始，且影片會記錄所使用的數字。",
+		"slot.cart": "卡帶",
+		"slot.cart.help": "Atari 2600 的卡帶 ROM。Stella 會從檔案內容判斷卡帶類型，因此接受從 2 KB 起的任何大小。"
+	}
+}

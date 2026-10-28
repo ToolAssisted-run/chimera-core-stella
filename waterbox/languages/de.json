@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella konnte aus dieser Cartridge keine Konsole machen.",
+		"error.no_file": "Im Projekt ist keine Cartridge-Datei.",
+		"error.not_cart": "'%1' hat %2 Byte, was nicht die Größe einer Atari-2600-Cartridge ist.",
+		"error.not_read": "'%1' konnte nicht gelesen werden.",
+		"setting.format": "Fernsehnorm",
+		"setting.format.about": "Für welche Fernsehnorm die Konsole gebaut ist. AUTO verwendet, was die Cartridge angibt, wie es ein echter 2600 tut. Wenn man eine Norm von Hand wählt, kann ein Spiel für die eine Region auf der anderen laufen. Es ändert die Bildrate, daher braucht ein Film denselben Wert.",
+		"setting.port1": "Gerät an Anschluss 1",
+		"setting.port1.about": "Was am linken Controller-Anschluss angeschlossen ist.",
+		"setting.port2": "Gerät an Anschluss 2",
+		"setting.port2.about": "Was am rechten Controller-Anschluss angeschlossen ist.",
+		"setting.randomseed": "Startwert beim Einschalten",
+		"setting.randomseed.about": "Die Zahl, die bestimmt, was der Speicher und der Timer der Maschine beim Einschalten enthalten. Auf einem echten 2600 enthalten sie, was dort zuletzt lag. Stella ahmt das mit Zufallswerten nach, wodurch jede Sitzung anders startet. Mit einer festen Zahl startet dasselbe Projekt immer gleich, und ein Film hält die verwendete Zahl fest.",
+		"slot.cart": "Cartridge",
+		"slot.cart.help": "Das ROM der Atari-2600-Cartridge. Stella erkennt den Typ der Cartridge am Inhalt der Datei, daher wird jede Größe ab 2 KB angenommen."
+	}
+}

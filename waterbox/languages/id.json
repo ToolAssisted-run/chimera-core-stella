@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella tidak dapat membuat konsol dari kartrid ini.",
+		"error.no_file": "Tidak ada berkas kartrid di dalam proyek.",
+		"error.not_cart": "'%1' berukuran %2 byte, yang bukan ukuran kartrid Atari 2600.",
+		"error.not_read": "Tidak dapat membaca '%1'.",
+		"setting.format": "Format Televisi",
+		"setting.format.about": "Standar televisi yang dibuat untuk konsol. AUTO memakai yang dinyatakan kartrid, seperti konsol 2600 sungguhan. Memilih sendiri membuat game buatan satu wilayah dapat berjalan di wilayah lain. Ini mengubah laju frame, sehingga movie membutuhkan nilai yang sama.",
+		"setting.port1": "Perangkat Port 1",
+		"setting.port1.about": "Apa yang dicolokkan ke port kontroler kiri.",
+		"setting.port2": "Perangkat Port 2",
+		"setting.port2.about": "Apa yang dicolokkan ke port kontroler kanan.",
+		"setting.randomseed": "Seed Saat Dinyalakan",
+		"setting.randomseed.about": "Angka yang menentukan isi memori dan timer mesin saat dinyalakan. Pada 2600 sungguhan, isinya adalah sisa yang tertinggal. Stella meniru itu dengan nilai acak, yang membuat setiap sesi mulai berbeda. Dengan angka ini tetap, proyek yang sama selalu mulai dengan cara yang sama, dan movie mencatat angka yang dipakainya.",
+		"slot.cart": "Kartrid",
+		"slot.cart.help": "ROM kartrid Atari 2600. Stella mengenali jenis kartrid dari isi berkasnya, sehingga ukuran apa pun dari 2 KB ke atas diterima."
+	}
+}

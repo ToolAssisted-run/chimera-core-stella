@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella no ha pogut fer una consola amb aquest cartutx.",
+		"error.no_file": "No hi ha cap fitxer de cartutx al projecte.",
+		"error.not_cart": "«%1» té %2 bytes, que no és la mida d'un cartutx d'Atari 2600.",
+		"error.not_read": "No s'ha pogut llegir «%1».",
+		"setting.format": "Format de televisió",
+		"setting.format.about": "Quin estàndard de televisió està fet per a la consola. AUTO usa el que diu el cartutx, com ho fa un 2600 real. Triar-ne un a mà permet que un joc fet per a una regió funcioni a l'altra. Canvia la freqüència de fotogrames, així que una pel·lícula necessita el mateix valor.",
+		"setting.port1": "Dispositiu del port 1",
+		"setting.port1.about": "El que hi ha connectat al port de comandament esquerre.",
+		"setting.port2": "Dispositiu del port 2",
+		"setting.port2.about": "El que hi ha connectat al port de comandament dret.",
+		"setting.randomseed": "Llavor d'encesa",
+		"setting.randomseed.about": "El número que decideix què tenen la memòria i el temporitzador de la màquina en encendre-la. En un 2600 real tenen el que hi havia abans. Stella ho imita amb valors aleatoris, cosa que faria que cada sessió comencés diferent. Amb aquest número fix, el mateix projecte sempre comença igual, i una pel·lícula registra el número que va usar.",
+		"slot.cart": "Cartutx",
+		"slot.cart.help": "La ROM del cartutx d'Atari 2600. Stella dedueix el tipus de cartutx pel contingut del fitxer, així que s'accepta qualsevol mida a partir de 2 KB."
+	}
+}

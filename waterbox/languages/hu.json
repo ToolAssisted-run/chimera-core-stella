@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "A Stella nem tudott konzolt készíteni ebből a kazettából.",
+		"error.no_file": "A projektben nincs kazettafájl.",
+		"error.not_cart": "A(z) „%1” %2 bájtos, ami nem egy Atari 2600 kazetta mérete.",
+		"error.not_read": "Nem sikerült olvasni: „%1”.",
+		"setting.format": "Tévéformátum",
+		"setting.format.about": "Melyik tévészabványra épül a konzol. Az AUTO azt használja, amit a kazetta megad, ahogy az igazi 2600 is. Ha kézzel választ egyet, egy egyik régióra készült játék a másik régióban is futhat. Ez megváltoztatja a képkockasebességet, ezért a movie-hoz ugyanez az érték kell.",
+		"setting.port1": "1-es port eszköze",
+		"setting.port1.about": "A bal vezérlőportra csatlakoztatott eszköz.",
+		"setting.port2": "2-es port eszköze",
+		"setting.port2.about": "A jobb vezérlőportra csatlakoztatott eszköz.",
+		"setting.randomseed": "Bekapcsolási kezdőszám",
+		"setting.randomseed.about": "Az a szám, amely eldönti, mit tartalmaz a gép memóriája és időzítője bekapcsoláskor. Egy igazi 2600-ason az ott maradt értékek vannak. A Stella ezt véletlen értékekkel utánozza, ami minden munkamenetet másképp indítana. Ha ez a szám rögzített, a projekt mindig ugyanúgy indul, a movie pedig rögzíti a használt számot.",
+		"slot.cart": "Kazetta",
+		"slot.cart.help": "Az Atari 2600 kazetta ROM-ja. A Stella a kazetta típusát a fájl tartalmából állapítja meg, ezért 2 KB-tól felfelé bármilyen méret elfogadott."
+	}
+}

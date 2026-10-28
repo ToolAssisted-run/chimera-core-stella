@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella z této kazety nemohla vytvořit konzoli.",
+		"error.no_file": "V projektu není žádný soubor kazety.",
+		"error.not_cart": "'%1' má %2 bajtů, což není velikost kazety Atari 2600.",
+		"error.not_read": "Nelze přečíst '%1'.",
+		"setting.format": "Televizní formát",
+		"setting.format.about": "Pro jaký televizní standard je konzole stavěna. AUTO použije to, co uvádí kazeta, jako skutečná 2600. Ruční volba umožní hře určené pro jeden region běžet na druhém. Mění to snímkovou frekvenci, proto záznam potřebuje stejnou hodnotu.",
+		"setting.port1": "Zařízení portu 1",
+		"setting.port1.about": "Co je zapojeno do levého portu ovladače.",
+		"setting.port2": "Zařízení portu 2",
+		"setting.port2.about": "Co je zapojeno do pravého portu ovladače.",
+		"setting.randomseed": "Počáteční semínko po zapnutí",
+		"setting.randomseed.about": "Číslo, které rozhoduje, co drží paměť a časovač stroje po zapnutí. Na skutečné 2600 drží to, co tam zůstalo. Stella to napodobuje náhodnými hodnotami, takže by každé sezení začínalo jinak. S pevným číslem vždy začíná projekt stejně a záznam zapíše číslo, které použil.",
+		"slot.cart": "Kazeta",
+		"slot.cart.help": "ROM kazety Atari 2600. Stella určí typ kazety z obsahu souboru, takže se přijme jakákoli velikost od 2 KB výše."
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella không thể tạo máy từ băng này.",
+		"error.no_file": "Dự án không có tệp băng nào.",
+		"error.not_cart": "'%1' có %2 byte, không phải kích thước của băng Atari 2600.",
+		"error.not_read": "Không thể đọc '%1'.",
+		"setting.format": "Chuẩn truyền hình",
+		"setting.format.about": "Máy được làm theo chuẩn truyền hình nào. AUTO dùng điều mà băng khai báo, như một 2600 thật làm. Chọn bằng tay cho phép một trò chơi làm cho một khu vực chạy trên khu vực kia. Điều này đổi tốc độ khung hình, nên một bản ghi cần cùng giá trị.",
+		"setting.port1": "Thiết bị cổng 1",
+		"setting.port1.about": "Thiết bị cắm vào cổng tay cầm bên trái.",
+		"setting.port2": "Thiết bị cổng 2",
+		"setting.port2.about": "Thiết bị cắm vào cổng tay cầm bên phải.",
+		"setting.randomseed": "Số hạt giống khi bật nguồn",
+		"setting.randomseed.about": "Số quyết định bộ nhớ và bộ đếm thời gian của máy giữ gì khi bật nguồn. Trên một 2600 thật, chúng giữ những gì còn lại trước đó. Stella bắt chước điều đó bằng giá trị ngẫu nhiên, điều này sẽ khiến mọi phiên bắt đầu khác nhau. Khi số này được cố định, cùng một dự án luôn bắt đầu theo cùng cách, và bản ghi ghi số nó đã dùng.",
+		"slot.cart": "Băng",
+		"slot.cart.help": "ROM băng Atari 2600. Stella tự xác định loại băng từ nội dung tệp, nên chấp nhận mọi kích thước từ 2 KB trở lên."
+	}
+}
