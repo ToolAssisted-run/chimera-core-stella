@@ -1,0 +1,18 @@
+{
+	"texts": {
+		"error.no_console": "Stella could not make a console from this cartridge.",
+		"error.no_file": "No cartridge file is in the project.",
+		"error.not_cart": "'%1' is %2 bytes, which is not the size of an Atari 2600 cartridge.",
+		"error.not_read": "Could not read '%1'.",
+		"setting.format": "Television Format",
+		"setting.format.about": "Which television standard the console is built for. AUTO uses what the cartridge says, as a real 2600 does. Choosing one by hand lets a game made for one region run on the other. It changes the frame rate, so a movie needs the same value.",
+		"setting.port1": "Port 1 Device",
+		"setting.port1.about": "What is plugged into the left controller port.",
+		"setting.port2": "Port 2 Device",
+		"setting.port2.about": "What is plugged into the right controller port.",
+		"setting.randomseed": "Power-on Seed",
+		"setting.randomseed.about": "The number that decides what the machine's memory and timer hold when it is switched on. On a real 2600 they hold whatever was left there. Stella imitates that with random values, which would make every session start differently. With this number fixed, the same project always starts the same way, and a movie records the number it used.",
+		"slot.cart": "Cartridge",
+		"slot.cart.help": "The Atari 2600 cartridge ROM. Stella works out the cartridge type from the file's contents, so any size from 2 KB up is accepted."
+	}
+}

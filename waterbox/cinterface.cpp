@@ -43,6 +43,11 @@ extern "C" {
 #include "blip_buf.h"
 }
 
+/* A text a person reads is a key of languages/en.json, each of its
+ * arguments after a TEXT_ARG (chimera docs/translations.md). TEXT_ARG is a
+ * string of its own so the byte after it is never read as more of its hex. */
+#define TEXT_ARG "\x1f"
+
 static char g_loadError[512];
 static int g_inited;
 static int g_inputRead;
@@ -400,7 +405,7 @@ ECL_EXPORT int Init(void)
 	FILE *f = fopen(file, "rb");
 	if (!f)
 	{
-		snprintf(g_loadError, sizeof(g_loadError), "no cartridge is mounted");
+		snprintf(g_loadError, sizeof(g_loadError), "error.no_file");
 		return 0;
 	}
 	fseek(f, 0, SEEK_END);
@@ -410,7 +415,7 @@ ECL_EXPORT int Init(void)
 	{
 		fclose(f);
 		snprintf(g_loadError, sizeof(g_loadError),
-			"'%s' is %ld bytes, which is not a 2600 cartridge", file, romSize);
+			"error.not_cart" TEXT_ARG "%s" TEXT_ARG "%ld", file, romSize);
 		return 0;
 	}
 	static uint8_t *romBuffer;
@@ -420,7 +425,7 @@ ECL_EXPORT int Init(void)
 	if (fread(romBuffer, 1, static_cast<size_t>(romSize), f) != static_cast<size_t>(romSize))
 	{
 		fclose(f);
-		snprintf(g_loadError, sizeof(g_loadError), "could not read '%s'", file);
+		snprintf(g_loadError, sizeof(g_loadError), "error.not_read" TEXT_ARG "%s", file);
 		return 0;
 	}
 	fclose(f);
@@ -447,7 +452,7 @@ ECL_EXPORT int Init(void)
 	if (!g_stella.create(cfg, false))
 	{
 		snprintf(g_loadError, sizeof(g_loadError),
-			"Stella could not make a console from this cartridge");
+			"error.no_console");
 		return 0;
 	}
 
