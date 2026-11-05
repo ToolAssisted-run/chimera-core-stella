@@ -214,9 +214,8 @@ version that carries `+local` or `-dirty`.
 In CI the frontend gate job builds the package with `CORE_VERSION` set, runs
 the frontend gate on it and uploads it as the artifact `stella-<commit SHA>`
 (`actions/upload-artifact@v7`). The `publish` job hands that artifact to
-Chimera's reusable workflow `publish-core.yml`. Nothing is published from a
-pull request. A run started by hand takes an input `kind`, `dev` or `nightly`;
-blank means `dev`.
+Chimera's reusable workflow `publish-core.yml`. Only the scheduled run and a
+run started by hand publish; a push or a pull request publishes nothing.
 
 ## Install it into Chimera
 
@@ -240,9 +239,8 @@ Releases page
 (https://github.com/ToolAssisted-run/chimera-core-stella/releases) as
 `stella-<version>.chimeraCore`:
 
-- `dev`: replaced on every push to main that passes the gates.
-- `nightly-YYYY-MM-DD`: dated, from the scheduled run (04:00 UTC), and only
-  when main moved since the last one.
+- `nightly-YYYY-MM-DD`: dated, from the scheduled run (04:00 UTC) or a run
+  started by hand, and only when main moved since the last one.
 
 To use the core, start Chimera (`build/meson-linux/source/ui/chimera` on Linux in a source checkout), choose File > New Project... and pick the core. To play a ROM with no project, pass
 `--core=<package> <rom>` on the command line.
